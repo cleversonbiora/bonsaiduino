@@ -1,12 +1,13 @@
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, ScrollView, View, Image, Button, Alert} from 'react-native';
 import Speedometer from 'react-native-speedometer-chart';
 import Header from './src/components/header'
 import Luminosity from './src/components/luminosity'
 import SoilMoisture from './src/components/soil-moisture'
 import Temperature from './src/components/temperature'
 import style from './src/assets/style'
+import Humidity from './src/components/humidity';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,7 +22,8 @@ export default class App extends Component {
     this.state = {
       soilMoisture: 0,
       temperature: 0,
-      luminosity: 0
+      luminosity: 0,
+      humidity: 0
     }
   }
   componentDidMount() {
@@ -35,13 +37,22 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Header />
-        <SoilMoisture soilMoisture={this.state.soilMoisture} />
-        <Temperature temperature={this.state.temperature}/>
-        <Luminosity luminosity={this.state.luminosity}/>
-      </View>
+      <ScrollView style={styles.outContainer}>
+        <View style={styles.container}>        
+          <Header />
+          <SoilMoisture soilMoisture={this.state.soilMoisture} />
+          <Temperature temperature={this.state.temperature}/>
+          <Humidity humidity={this.state.humidity}/>
+          <Luminosity luminosity={this.state.luminosity}/>
+          <View style={styles.buttonContainer}>
+            <Button onPress={this._regar} title="Regar" color="#2eb82e"/>
+          </View>
+        </View>
+      </ScrollView>
     );
+  }
+  _regar(){
+    Alert.alert('Regando...');
   }
   loadData(){
     fetch("http://bonsaiarduino.ga/api/dashboard")
@@ -49,17 +60,24 @@ export default class App extends Component {
       .then(json => this.setState({
           soilMoisture:json.soilMoisture,
           temperature:json.temperature,
-          luminosity:json.luminosity
+          luminosity:json.luminosity,
+          humidity:json.humidity
         }));
   }
 }
 
 const styles = StyleSheet.create({
+  outContainer: {
+    backgroundColor: '#333'
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#333',
     paddingTop: 10,
+  },
+  buttonContainer: {
+    margin:30,
+    width:"80%"
   }
 });

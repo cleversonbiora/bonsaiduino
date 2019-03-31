@@ -10,7 +10,7 @@ export default class Luminosity extends Component {
     return (
       <View>
          <View style={styles.luminosity}>
-            <Progress.Bar progress={this.props.luminosity} width={200} color='#ffff00'/>
+            <Progress.Bar progress={(this.props.luminosity / 1024)} width={250} color='#ffff00'/>
          </View>
          <Text style={style.instructions}>Luminosidade:{this.props.luminosity}</Text>
       </View>

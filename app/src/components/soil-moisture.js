@@ -11,7 +11,7 @@ export default class SoilMoisture extends Component {
       <View >
         <Speedometer 
             value={this.props.soilMoisture} 
-            totalValue={1}
+            totalValue={1024}
             innerColor="#333"
             internalColor={this.getColor(this.props.soilMoisture)}/>
          <Text style={style.instructions}>Humidade do Solo:{this.props.soilMoisture}</Text>
@@ -19,9 +19,9 @@ export default class SoilMoisture extends Component {
     );
   }
   getColor(value){
-    if(value > 0.7)
+    if(value > 600)
       return '#2eb82e';
-    else if(value > 0.3)
+    else if(value > 350)
       return '#dddd00';
     else
       return '#ff0000';
