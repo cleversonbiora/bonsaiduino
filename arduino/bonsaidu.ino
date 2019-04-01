@@ -1,9 +1,11 @@
 #include <SPI.h>
 #include <Ethernet.h>
+#include "DHT.h"
 #define temperature A0
 #define luminosity A1
 #define moisture_soil A2
-
+#define DHTTYPE DHT11 // DHT 11
+DHT dht(temperature, DHTTYPE);
 byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x01 }; // RESERVED MAC ADDRESS
 EthernetClient client;
 
@@ -12,10 +14,13 @@ void setup() {
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP"); 
   }
+  dht.begin();
 }
 
 void loop() {
-  int temperaturaValue = analogRead(temperature);
+  float h = dht.readHumidity();
+  float t = dht.readTemperature();
+  int temperaturaValue = t;
   int luminosityValue = analogRead(luminosity);
   int moistureValue = analogRead(moisture_soil);
 
@@ -24,7 +29,10 @@ void loop() {
   sendData(3, temperaturaValue);
 
   Serial.print("Temperature = ");
-  Serial.print(temperaturaValue);
+  Serial.print(t);
+  Serial.print("\n\n");
+  Serial.print("Humidity = ");
+  Serial.print(h);
   Serial.print("\n\n");
   Serial.print("Luminosity = ");
   Serial.print(luminosityValue);
@@ -33,7 +41,8 @@ void loop() {
   Serial.print(moistureValue);
   Serial.print("\n\n");
 
-  delay(600000);
+  delay(600000);//10min
+  //delay(3000);//3sec
 }
 
 void sendData(int sensorId, int value){

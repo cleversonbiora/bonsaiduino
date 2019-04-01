@@ -17,6 +17,7 @@ $db = $database->getConnection();
 $sensor1 = new SensorValue($db);
 $sensor2 = new SensorValue($db);
 $sensor3 = new SensorValue($db);
+$sensor4 = new SensorValue($db);
  
 // set ID property of sensorvalue to be edited
 $sensor1->readLast(1);
@@ -27,11 +28,15 @@ $luminosity = $sensor2->Value;
 
 $sensor3->readLast(3);
 $temperature = $sensor3->Value;
+
+$sensor4->readLast(4);
+$humidity = $sensor4->Value;
 // create array
 $sensorvalue_arr = array(
-    "soilMoisture" =>  $soilMoisture,
-    "luminosity" => $luminosity,
-    "temperature" => $temperature
+    "soilMoisture" =>  round($soilMoisture),
+    "luminosity" => round($luminosity),
+    "temperature" => round($temperature),
+    "humidity" => round($humidity)
 );
  
 // make it json format
