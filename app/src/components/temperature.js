@@ -8,7 +8,7 @@ export default class Temperature extends Component {
   render() {
     return (
       <View>
-         <Text style={styles.temperature}>{Number.parseInt(this.props.temperature,0)}°</Text>
+         <Text style={[styles.temperature, Number.parseInt(this.props.temperature,0) > 30 ? styles.textAlert : null]}>{Number.parseInt(this.props.temperature,0)}°</Text>
          <Text style={style.instructions}>Temperatura</Text>
       </View>
     );
@@ -21,4 +21,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#999999',
   },
+  textAlert: {
+    color: '#ffff00',
+  }
 });

@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import * as Progress from 'react-native-progress';
 import style from '../assets/style'
+import {valuePercent,valueAdjust} from '../helpers/MathExtension';
+
 
 export default class Luminosity extends Component {
 
@@ -10,9 +12,9 @@ export default class Luminosity extends Component {
     return (
       <View>
          <View style={styles.luminosity}>
-            <Progress.Bar progress={(this.props.luminosity / 1024)} width={250} color='#ffff00'/>
+            <Progress.Bar progress={(valueAdjust(this.props.luminosity) / 1024)} width={250} color='#ffff00'/>
          </View>
-         <Text style={style.instructions}>Luminosidade:{this.props.luminosity}</Text>
+         <Text style={style.instructions}>Luminosidade:{valuePercent(this.props.luminosity)}%</Text>
       </View>
     );
   }

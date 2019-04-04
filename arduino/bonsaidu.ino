@@ -9,6 +9,9 @@ DHT dht(temperature, DHTTYPE);
 byte mac[] = { 0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x01 }; // RESERVED MAC ADDRESS
 EthernetClient client;
 
+//https://gist.github.com/ericoporto/fb9c975a290a822edca9
+//https://arduino.stackexchange.com/questions/10410/how-to-call-url-with-arduino-ethernet-shield
+
 void setup() {
   Serial.begin(9600);  /* Define baud rate for serial communication */
   if (Ethernet.begin(mac) == 0) {
