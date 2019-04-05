@@ -17,10 +17,10 @@ export default class App extends Component {
   render() {
     return (
       <Router navigationBarStyle={{ backgroundColor: '#333' }} titleStyle={{color: '#fff'}} >
-        <Scene key="root">
+        <Stack key="root">
           <Scene key="home" component={Home} hideNavBar={true} initial />
           <Scene key="color" component={Color} title="Iluminação" headerTintColor="#fff"/>
-        </Scene>
+        </Stack>
       </Router>
     );
   }
