@@ -100,4 +100,46 @@ class SensorValue{
         $this->Date = $row['Date'];
         $this->SensorId = $row['SensorId'];
     }
+
+    function lastWeek($SensorId){
+    
+        // select all query
+        $query = "SELECT 
+                DATE(Date) as Date,AVG(Value) as AvgValue
+                FROM
+                    " . $this->table_name . "
+                WHERE 
+                    SensorId = " . $SensorId . " and DATE(Date) > CURDATE() - INTERVAL 7 DAY
+                GROUP BY 
+                    DATE(Date)";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        // execute query
+        $stmt->execute();
+    
+        return $stmt;
+    }
+
+    function today($SensorId){
+    
+        // select all query
+        $query = "SELECT 
+                HOUR(Date) as Hour,AVG(Value) as AvgValue
+                FROM
+                    " . $this->table_name . "
+                WHERE 
+                    SensorId = " . $SensorId . " and DATE(Date) = CURDATE()
+                GROUP BY 
+                    HOUR(Date)";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        // execute query
+        $stmt->execute();
+    
+        return $stmt;
+    }
 }
