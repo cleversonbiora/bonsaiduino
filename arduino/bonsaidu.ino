@@ -11,6 +11,7 @@ EthernetClient client;
 
 //https://gist.github.com/ericoporto/fb9c975a290a822edca9
 //https://arduino.stackexchange.com/questions/10410/how-to-call-url-with-arduino-ethernet-shield
+//https://arduinojson.org/v6/example/
 
 void setup() {
   Serial.begin(9600);  /* Define baud rate for serial communication */

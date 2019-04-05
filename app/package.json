@@ -13,7 +13,8 @@
     "react-native-color-picker": "^0.4.0",
     "react-native-progress": "^3.5.0",
     "react-native-router-flux": "^4.0.6",
-    "react-native-speedometer-chart": "^0.6.4"
+    "react-native-speedometer-chart": "^0.6.4",
+    "react-native-svg": "^9.3.7"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
